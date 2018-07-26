@@ -1,0 +1,10 @@
+{% extends '@Blog/layout.html.twig' %}
+
+{% block content %}
+        <h1>Admin</h1>
+        {{ renderService('blog.controller.list.admin:indexAction', {page: page}) }}
+
+    <div>
+        <a href="{{ path('blog_admin_create') }}">Create new post</a>
+    </div>
+{% endblock %}

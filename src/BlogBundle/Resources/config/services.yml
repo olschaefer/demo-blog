@@ -1,0 +1,35 @@
+services:
+  blog.controller.list:
+    class: BlogBundle\Controller\PostListController
+    arguments: [0, '', '', '', '@blog.service.blog_post_provider.public']
+    calls:
+      - [setContainer, ['@service_container']]
+
+  blog.controller.list.admin:
+    class: BlogBundle\Controller\PostListController
+    arguments: [0, '', '', '', '@blog.service.blog_post_provider.admin']
+    calls:
+      - [setContainer, ['@service_container']]
+
+  blog.service.blog_post_provider.public:
+    class: BlogBundle\Service\BlogPostProviderPublic
+    arguments: ['@blog.repository.blog_post']
+
+  blog.service.blog_post_provider.admin:
+    class: BlogBundle\Service\BlogPostProviderAdmin
+    arguments: ['@blog.repository.blog_post']
+
+  blog.service.blog_post_serializer:
+    class: BlogBundle\Service\BlogPostSerializer
+
+  blog.repository.blog_post:
+    class: BlogBundle\Repository\BlogPostRepository
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: [ BlogBundle\Entity\BlogPost ]
+
+  blog.twig.extension:
+    class: BlogBundle\Twig\BlogExtension
+    arguments: ['@service_container']
+    tags:
+      - { name: 'twig.extension' }
+    public: false

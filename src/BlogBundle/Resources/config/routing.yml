@@ -1,0 +1,20 @@
+blog_list:
+    path:     /
+    defaults: { _controller: BlogBundle:Public:list, page: 1 }
+
+blog_list_page:
+    path:     /{page}
+    defaults: { _controller: BlogBundle:Public:list, page: 1 }
+    requirements: { page: '\d+' }
+
+blog_post_page:
+    path:     /show/{identifier}
+    defaults: { _controller: BlogBundle:Public:show }
+
+blog_admin:
+    resource: "@BlogBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/
+
+blog_api:
+    resource: "@BlogBundle/Resources/config/routing_api.yml"
+    prefix:   /api/

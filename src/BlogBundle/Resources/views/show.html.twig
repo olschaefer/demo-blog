@@ -1,0 +1,12 @@
+{% extends '@Blog/layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <div>
+        {{ post.text|raw }}
+    </div>
+
+    <div>
+        {{ post.tags|join(', ') }}
+    </div>
+{% endblock %}

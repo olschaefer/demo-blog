@@ -1,0 +1,17 @@
+blog_admin_list:
+    path:     /
+    defaults: { _controller: BlogBundle:Admin:list, page: 1 }
+
+blog_admin_list_page:
+    path:     /{page}
+    defaults: { _controller: BlogBundle:Admin:list, page: 1 }
+    requirements: { page: '\d+' }
+
+blog_admin_create:
+    path:     /create
+    defaults: { _controller: BlogBundle:Admin:edit }
+
+blog_admin_edit:
+    path:     /edit/{identifier}
+    defaults: { _controller: BlogBundle:Admin:edit }
+    requirements: { id: '\d+' }

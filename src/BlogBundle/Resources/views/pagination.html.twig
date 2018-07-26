@@ -1,0 +1,40 @@
+{% set delta = 2 %}
+
+{% set numPages = numPages == 0 ? 1 : numPages %}
+{% set left = currentPage - delta %}
+{% set right = currentPage + delta + 1 %}
+{% set range = [] %}
+{% set rangeWithEllipses = [] %}
+
+{% for i in 1..numPages %}
+    {% if (i == 1) or (i == numPages) or (i >= left and i < right) %}
+        {% set range = range|merge([i]) %}
+    {% endif %}
+{% endfor %}
+
+
+{% macro pageLink(path, pageNumber) %}
+    {% set url = pageNumber == 1 ? path(path) : path(path, {page: pageNumber}) %}
+    <a href="{{ url }}">{{ pageNumber }}</a>
+{% endmacro %}
+{% import _self as links %}
+
+
+{% set l = false %}
+{% for i in range %}
+    {% if l %}
+        {% if (i - l) == 2 %}
+            {{ links.pageLink(paginationRoute, l + 1) }}
+        {% elseif (i - l) != 1 %}
+            ...
+        {% endif %}
+    {% endif %}
+
+    {% if i == currentPage %}
+        {{ i }}
+    {% else %}
+        {{ links.pageLink(paginationRoute, i) }}
+    {% endif %}
+
+    {% set l = i %}
+{% endfor %}

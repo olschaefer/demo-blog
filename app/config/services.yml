@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    BlogBundle\:
+        resource: '../../src/BlogBundle/*'
+        exclude: '../../src/BlogBundle/{Entity,Repository,Tests}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+    BlogBundle\Controller\:
+        resource: '../../src/BlogBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']

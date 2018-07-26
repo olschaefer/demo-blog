@@ -1,0 +1,21 @@
+{% if posts.count > 0 %}
+    <ul>
+
+    {% for post in posts %}
+        <li>
+            <div>
+                <a href="{{ path(detailPageRoute, {'identifier': accessor.getValue(post, detailPageParamName)}) }}">{{ post.title }}</a>
+            </div>
+            <div>
+                Published: {{ post.publishedAt.format('d M Y H:i') }}
+            </div>
+        </li>
+    {% endfor %}
+
+    </ul>
+
+    Pages: {{ include('@Blog/pagination.html.twig', {paginationRoute: paginationRoute, numPages: numPages, currentPage: currentPage}) }}
+
+{% else %}
+    <h2>No posts found</h2>
+{% endif %}

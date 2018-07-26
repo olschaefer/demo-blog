@@ -1,0 +1,33 @@
+{% extends '@Blog/layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('bundles/blog/admin.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <a href="{{ path('blog_admin_list') }}">Go back</a>
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.slug) }}
+    {{ form_row(form.text) }}
+
+    <div class="form-group">
+        {{ form_label(form.tags) }}
+
+        <ul id="tag-list" data-prototype="{{ form_widget(form.tags.vars.prototype)|e }}" data-widget-tags="{{ '<li></li>'|e }}">
+            {% for tagField in form.tags %}
+                <li>
+                    {{ form_errors(tagField) }}
+                    {{ form_widget(tagField) }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button type="button" id="add-tag" data-list="#tag-list">Add tag</button>
+    </div>
+
+    {{ form_row(form.isActive) }}
+    {{ form_row(form.views) }}
+    {{ form_end(form) }}
+{% endblock %}

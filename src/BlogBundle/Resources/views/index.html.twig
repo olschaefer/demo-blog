@@ -1,0 +1,6 @@
+{% extends '@Blog/layout.html.twig' %}
+
+{% block content %}
+    <h1>Blog</h1>
+    {{ renderService('blog.controller.list:indexAction', {page: page}) }}
+{% endblock %}

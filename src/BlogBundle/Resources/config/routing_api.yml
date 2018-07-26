@@ -1,0 +1,18 @@
+blog_api_list:
+  path:     /blog_posts/
+  defaults: { _controller: BlogBundle:Api:list }
+  methods: ['GET']
+
+
+blog_api_post:
+  path:     /blog_posts/{id}
+  defaults: { _controller: BlogBundle:Api:show }
+  requirements: { id: '\d+' }
+  methods: ['GET']
+
+
+blog_api_increment_views:
+  path:     /blog_posts/{id}/views/
+  defaults: { _controller: BlogBundle:Api:incrementViews }
+  requirements: { id: '\d+' }
+  methods: ['POST']
